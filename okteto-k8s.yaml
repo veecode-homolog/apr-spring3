@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apr-spring3 
+spec:
+  selector:
+    matchLabels:
+      app: apr-spring3
+  template:
+    metadata:
+      labels:
+        app: apr-spring3
+    spec:
+      containers:
+        - image: okteto.dev/java-gradle-apr-spring3:1.0.0
+          name: apr-spring3
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: apr-spring3
+spec:
+  type: ClusterIP
+  ports:
+    - name: "apr-spring3"
+      port: 8080
+  selector:
+    app: apr-spring3
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: apr-spring3
+  annotations:
+    dev.okteto.com/generate-host: apr-spring3
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: apr-spring3
+                port:
+                  number: 8080
+            path: /
+            pathType: ImplementationSpecific

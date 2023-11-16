@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: apr-spring3
+  description: "teste"
+  annotations:
+    github.com/project-slug: veecode-homolog/apr-spring3
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/kubernetes-id: "apr-spring3"
+    vault.io/secrets-path: "apr-spring3"
+    grafana/tag-selector: "apr-spring3"
+    grafana/alert-label-selector: "alertname=apr-spring3"
+    argocd/proxy-url: '/argocd/api'
+    argocd/app-name: "apr-spring3"
+spec:
+  type: service
+  lifecycle: experimental
+  owner: "group:default/admin"
+
+
+
